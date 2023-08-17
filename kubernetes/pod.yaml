@@ -23,15 +23,15 @@ spec:
     securityContext: {}
     volumeMounts:
     - mountPath: /home/steam/ZomboidDedicatedServer
-      name: zomboid_dedicated_server
+      name: zomboid-dedicated-server
     - mountPath: /home/steam/Zomboid
-      name: zomboid_config
+      name: zomboid-config
   volumes:
   - hostPath:
       path: /home/fedora/zomboid/zomboid-dedicated-server/ZomboidDedicatedServer
       type: Directory
-    name: zomboid_dedicated_server
+    name: zomboid-dedicated-server
   - hostPath:
       path: /home/fedora/zomboid/zomboid-dedicated-server/ZomboidConfig
       type: Directory
-    name: zomboid_config
+    name: zomboid-config
