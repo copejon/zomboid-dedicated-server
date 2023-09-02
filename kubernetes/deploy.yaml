@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      initContainers:
+      - name: init-myservice
+        image: python:3.6
+        command: ["python", "/opt/myapp.py"]
+        envFrom:
+        - configMapRef:
+            name: my-configmap
+      containers:
+      - name: my-app
+        image: projectzomboid/server
+        ports:
+        - containerPort: 1234
+        - containerPort: 4567
+      - name: my-app-2
+        image: nginx:latest
+        ports:
+        - containerPort: 80

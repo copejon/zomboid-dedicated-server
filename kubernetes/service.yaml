@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service
+spec:
+  selector:
+    app: my-app
+  ports:
+  - name: zomboid-1234
+    protocol: TCP
+    port: 1234
+    targetPort: 1234
+  - name: zomboid-4567
+    protocol: TCP
+    port: 4567
+    targetPort: 4567
+  - name: http
+    protocol: TCP
+    port: 80
+    targetPort: 80

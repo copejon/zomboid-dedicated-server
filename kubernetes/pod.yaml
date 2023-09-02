@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    bind-mount-options: /home/fedora/zomboid/zomboid-dedicated-server/ZomboidDedicatedS
+  labels:
+    app: zomboid
+  name: zomboid-dedicated-server
+spec:
+  containers:
+  - image: docker.io/renegademaster/zomboid-dedicated-server:latest
+    name: zomboid-dedicated-server
+    envFrom:
+      - configMapRef:
+          name: zomboid-dedicated-server
+    ports:
+    - containerPort: 16261
+      hostPort: 16261
+      protocol: UDP
+    - containerPort: 16262
+      hostPort: 16262
+      protocol: UDP
+    securityContext: {}
+    volumeMounts:
+    - mountPath: /home/steam/ZomboidDedicatedServer
+      name: zomboid-dedicated-server
+    - mountPath: /home/steam/Zomboid
+      name: zomboid-config
+  volumes:
+  - hostPath:
+      path: /home/fedora/zomboid/zomboid-dedicated-server/ZomboidDedicatedServer
+      type: Directory
+    name: zomboid-dedicated-server
+  - hostPath:
+      path: /home/fedora/zomboid/zomboid-dedicated-server/ZomboidConfig
+      type: Directory
+    name: zomboid-config
