@@ -4,7 +4,7 @@ metadata:
   annotations:
     bind-mount-options: /home/fedora/zomboid/zomboid-dedicated-server/ZomboidDedicatedS
   labels:
-    app: zomboid
+    app: zomboid-dedicated-server
   name: zomboid-dedicated-server
 spec:
   containers:
@@ -14,11 +14,17 @@ spec:
       - configMapRef:
           name: zomboid-dedicated-server
     ports:
+    - containerPort: 8766
+      hostPort: 8766
+      protocol: UDP
     - containerPort: 16261
       hostPort: 16261
       protocol: UDP
     - containerPort: 16262
       hostPort: 16262
+      protocol: UDP
+    - containerPort: 16263
+      hostPort: 16263
       protocol: UDP
     securityContext: {}
     volumeMounts:

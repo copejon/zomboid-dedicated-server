@@ -1,20 +1,25 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: my-service
+  name: zomboid-dedicated-server
 spec:
   selector:
-    app: my-app
+    app: zomboid-dedicated-server
   ports:
-  - name: zomboid-1234
-    protocol: TCP
-    port: 1234
-    targetPort: 1234
-  - name: zomboid-4567
-    protocol: TCP
-    port: 4567
-    targetPort: 4567
-  - name: http
-    protocol: TCP
-    port: 80
-    targetPort: 80
+    - name: steam-query
+      protocol: TCP
+      port: 8766
+      targetPort: 8766
+    - name: game-server
+      protocol: TCP
+      port: 16261
+      targetPort: 16261
+    - name: remote-admin
+      protocol: TCP
+      port: 16262
+      targetPort: 16262
+    - name: steam-auth
+      protocol: TCP
+      port: 16263
+      targetPort: 16263
+  type: LoadBalancer  # Use 'LoadBalancer' if your Kubernetes cluster supports it

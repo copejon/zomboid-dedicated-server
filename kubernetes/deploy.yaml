@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-deployment
+  name: zomboid-dedicated-server
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: my-app
+        app: zomboid-dedicated-server
     spec:
       initContainers:
-      - name: init-myservice
+      - name: mod-init
         image: python:3.6
         command: ["python", "/opt/myapp.py"]
         envFrom:
@@ -20,8 +20,10 @@ spec:
       - name: my-app
         image: projectzomboid/server
         ports:
-        - containerPort: 1234
-        - containerPort: 4567
+        - containerPort: 8766
+        - containerPort: 62161
+        - containerPort: 62162
+        - containerPort: 62163
       - name: my-app-2
         image: nginx:latest
         ports:
